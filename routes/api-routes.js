@@ -19,8 +19,15 @@ module.exports = function(app) {
   });
 
   app.put("/api/burgers", function(req, res) {
-    db.Burger.update({
-        
-    })
+    console.log(req.body);
+    
+    var burgerName = req.body.burger_name;
+
+    db.Burger.update(
+        { devoured: true },
+        { where: { burger_name: burgerName } }
+    ).then(edits => {
+      res.json(edits);
+    });
   });
 };
