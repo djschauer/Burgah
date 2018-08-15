@@ -4,7 +4,7 @@ module.exports = function(app) {
 
   app.get("/api/burgers", function(req, res) {
     db.Burger.findAll({}).then(function(burgers) {
-      res.json(burgers);
+      res.render("index", { burgers: burgers });
     });
   });
 
@@ -14,7 +14,7 @@ module.exports = function(app) {
       burger_name: req.body.burger_name,
       devoured: false
     }).then(function(burgers) {
-      res.json(burgers);
+      res.render("index", { burgers: burgers });
     });
   });
 
@@ -27,7 +27,7 @@ module.exports = function(app) {
         { devoured: true },
         { where: { burger_name: burgerName } }
     ).then(edits => {
-      res.json(edits);
+      res.render("index", { burgers: edits });
     });
   });
 };
